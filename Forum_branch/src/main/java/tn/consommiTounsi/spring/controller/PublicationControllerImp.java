@@ -51,12 +51,7 @@ public class PublicationControllerImp implements IPublicationController {
 	PublicationRepository pub_rep;
 	@Autowired
 	CommentsRepository com_rep;
-	private byte[] bytes;
-	@PostMapping("/upload")
-	public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
-		this.bytes = file.getBytes();
-	}
-	
+
 	@GetMapping("/RetrievePublication")
 	public List<Publication> retrieveAllPublications(){
 		List<Publication> pub = pub_service.RetrievePublication();
@@ -64,22 +59,22 @@ public class PublicationControllerImp implements IPublicationController {
 	}
 	
 	@PostMapping("/AddPublication/{id}")
-	public String AddPub(@RequestBody Publication pub,@PathVariable("id") int id) throws Exception{
-		pub.setPic(this.bytes);
-		
-		this.bytes = null;
-		
+	public String AddPub(@RequestBody Publication pub,@PathVariable("id") int id) throws Exception{	
 		return pub_service.AddPublication(id, pub);
 		
 		
 		
 	}
 	
-	@PutMapping("/UpdatePublication/{id}")
-	public void UpdatePub(@RequestBody Publication pub,@PathVariable("id") int id){
-		
-		this.pub_service.UpdatePublicationById(pub, id);
-		
+	@PutMapping("/UpdatePublication/{id}/{user_id}")
+	public String UpdatePub(@PathVariable("id") int id ,@RequestBody Publication pub,@PathVariable("user_id") int user_id) {
+		pub.setId(id);
+		user_rep.findById(user_id).map(u ->{
+			pub.setUser(u);
+			this.pub_service.UpdatePublicationById(pub, id);	
+			return u;
+		});
+		return "pub Update successfully";
 	}
 	
 	@DeleteMapping("remove-publication/{id}")

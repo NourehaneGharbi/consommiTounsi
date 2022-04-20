@@ -116,6 +116,7 @@ public class CommentsService implements ICommentsService {
 		Iterable<User> user = userRep.findAll();
 		for (User user2 : user) {
 			if (lcomments_rep.HahaComments(com_id, user_id)==0) {
+				//get user with id in par
 				if (user2.getUser_id()==user_id) {
 					
 					com_rep.findById(com_id).map(c ->{

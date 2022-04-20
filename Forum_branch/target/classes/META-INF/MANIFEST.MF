@@ -1,10 +1,9 @@
 Manifest-Version: 1.0
-Implementation-Title: consommiTounsi
-Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Title: CrudForum
+Implementation-Version: 1.0
 Built-By: CHIKHAOUI
-Implementation-Vendor-Id: tn.consommiTounsi.spring
+Implementation-Vendor-Id: tn.esprit.spring
 Build-Jdk: 1.8.0_60
-Implementation-URL: https://spring.io/projects/spring-boot/consommiTou
- nsi
+Implementation-URL: https://spring.io/projects/spring-boot/CrudForum
 Created-By: Maven Integration for Eclipse
 
