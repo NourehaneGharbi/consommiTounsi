@@ -1,0 +1,11 @@
+tn\consommiTounsi\spring\ConsommiTounsiApplication.class
+tn\consommiTounsi\spring\services\FactureServiceImpl.class
+tn\consommiTounsi\spring\controller\FactureController.class
+tn\consommiTounsi\spring\services\FactureService.class
+tn\consommiTounsi\spring\services\OrdersService.class
+tn\consommiTounsi\spring\entity\Orders.class
+tn\consommiTounsi\spring\controller\OrdersController.class
+tn\consommiTounsi\spring\repository\OrdersRepository.class
+tn\consommiTounsi\spring\entity\Facture.class
+tn\consommiTounsi\spring\services\OrdersServiceImpl.class
+tn\consommiTounsi\spring\repository\FactureRepository.class
