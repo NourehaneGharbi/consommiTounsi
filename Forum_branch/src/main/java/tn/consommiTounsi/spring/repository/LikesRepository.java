@@ -14,16 +14,16 @@ import tn.consommiTounsi.spring.entity.LikePosts;
 public interface LikesRepository extends JpaRepository<LikePosts, Integer> {
 	
 	
-	@Query(value="select count(*) from like_posts l where l.pub_id= :publication_id and l.user_id= :user_id ",nativeQuery=true)
+	@Query(value="select count(*) from like_posts l where l.pub_id= :publication_id and l.user_id= :user_id and l.is_liked = true ",nativeQuery=true)
 	int FindUserByIdFromLikes(@Param("publication_id") int publication_id,@Param("user_id") int user_id);
 	@Query(value="select count(*) from like_posts k where k.pub_id= :publication_id and k.user_id= :user_id and k.is_liked = false",nativeQuery=true)
 	int FindUserByIdFromDislikes(@Param("publication_id") int publication_id,@Param("user_id") int user_id);
 	@Transactional
 	@Modifying
-	@Query(value="delete from like_posts l where l.pub_id= :publication_id and l.user_id= :user_id and l.is_liked = true",nativeQuery=true)
+	@Query(value="delete from like_posts where pub_id= :publication_id and user_id= :user_id and is_liked = true",nativeQuery=true)
 	void DeleteLike(@Param("publication_id") int publication_id,@Param("user_id") int user_id);
 	@Transactional
 	@Modifying
-	@Query(value="delete from like_posts l where l.pub_id= :publication_id and l.user_id= :user_id and l.is_liked = false",nativeQuery=true)
+	@Query(value="delete from like_posts where pub_id= :publication_id and user_id= :user_id and is_liked = false",nativeQuery=true)
 	void DeleteDisLike(@Param("publication_id") int publication_id,@Param("user_id") int user_id);
 }

@@ -16,10 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -44,8 +41,6 @@ public class Publication extends AuditModel {
 	@ManyToOne
 	@JoinColumn(name = "user", nullable=false)
 	private User user;
-	@Lob
-	private byte[] pic;
 	@OneToMany(mappedBy="pub",cascade=CascadeType.ALL)
 	private List<LikePosts> likes;
 	@OneToMany(mappedBy = "pub_id",cascade=CascadeType.ALL)
@@ -200,9 +195,6 @@ public class Publication extends AuditModel {
 
 
 
-	public byte[] getPic() {
-		return pic;
-	}
 
 
 
@@ -210,53 +202,15 @@ public class Publication extends AuditModel {
 
 
 
-
-
-	public void setPic(byte[] pic) {
-		this.pic = pic;
-	}
-
-
-
-
-
-
-
-
-
-	public Publication(int id, String publication_txt, User user, byte[] pic, List<LikePosts> likes,
+	public Publication(int id, String publication_txt, User user, List<LikePosts> likes,
 			List<Comments> comments) {
 		super();
 		this.id = id;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}
-
-
-
-
-
-
-
-
-
-	public Publication(String publication_txt, User user, byte[] pic, List<LikePosts> likes, List<Comments> comments) {
-		super();
-		this.publication_txt = publication_txt;
-		this.user = user;
-		this.pic = pic;
-		this.likes = likes;
-		this.comments = comments;
-	}
-
-
-
-
-
-
 
 
 
@@ -284,14 +238,13 @@ public class Publication extends AuditModel {
 
 
 
-	public Publication(int id, String title, String publication_txt, User user, byte[] pic, List<LikePosts> likes,
+	public Publication(int id, String title, String publication_txt, User user,List<LikePosts> likes,
 			List<Comments> comments) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}
@@ -304,13 +257,12 @@ public class Publication extends AuditModel {
 
 
 
-	public Publication(String title, String publication_txt, User user, byte[] pic, List<LikePosts> likes,
+	public Publication(String title, String publication_txt, User user, List<LikePosts> likes,
 			List<Comments> comments) {
 		super();
 		this.title = title;
 		this.publication_txt = publication_txt;
 		this.user = user;
-		this.pic = pic;
 		this.likes = likes;
 		this.comments = comments;
 	}

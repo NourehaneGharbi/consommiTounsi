@@ -27,6 +27,7 @@ public class LikesService implements ILikeService {
 	public void AddLike(LikePosts likes, int user_id, int pub_id) {
 		// TODO Auto-generated method stub
 		Iterable<User> user = user_rep.findAll();
+		//get user with id in par
 		for (User user2 : user) {
 		if (like_rep.FindUserByIdFromLikes(pub_id, user_id)==0) {
 			
