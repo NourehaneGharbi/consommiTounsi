@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajouter Un Promotion</h4>
+                        <!--<p class="card-category"></p>-->
+                    </div>
+                    <div class="card-body">
+                        <form >
+                            <div class="form-group col-md-6">
+                                <label>Valeur de Promotion</label>
+                                <input type="number" formControlName="valeurPromotion"  class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Date début Promotion</label>
+                                <input type="date" formControlName="datePromotionDebut"  class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Date fin Promotion</label>
+                                <input type="date" formControlName="datePromotionFin"  class="form-control">
+                            </div>
+                              
+                            <div mat-dialog-action [align]="'end'">
+                                <button mat-raised-button color="primary" mat-dialog-close >Ajouter</button>
+                                <button style="margin-left: 8px;" mat-raised-button color="warn" mat-dialog-close>Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
