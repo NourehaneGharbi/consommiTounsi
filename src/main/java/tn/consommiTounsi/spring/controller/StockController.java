@@ -8,6 +8,7 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import tn.consommiTounsi.spring.entity.Stock;
 import tn.consommiTounsi.spring.services.Implementation.StockServiceImpl;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class StockController {
 
 	@Autowired
@@ -28,7 +30,8 @@ public class StockController {
 	 // URL : http://localhost:8081/SpringMVC/retrieveAllStocks
     @GetMapping("/retrieveAllStocks")
     public List<Stock> retrieveAllStocks() {
-		return stockServiceImpl.retrieveAllStocks();
+    	List<Stock> stocks =  stockServiceImpl.retrieveAllStocks();
+    	return stocks;
 	}
     
     // URL : http://localhost:8081/SpringMVC/addStock

@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +40,8 @@ public class Commande implements Serializable{
     @Column(name="payType")
     String payType;
 	
+   // @JsonManagedReference
+    @JsonIgnore
     @ManyToMany(mappedBy="commandes", cascade = CascadeType.ALL)
 	private Set<Produit> produits;
     

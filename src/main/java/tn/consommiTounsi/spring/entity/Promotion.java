@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -31,21 +34,22 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Promotion implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@Column(name="idPromotion")
 	Long idPromotion;
 	
-	//@Temporal (TemporalType.DATE)
-	LocalDateTime datePromotionDebut;
+	@Temporal (TemporalType.DATE)
+	Date datePromotionDebut;
 
 	@Temporal (TemporalType.DATE)
 	Date datePromotionFin;
-
-	String typePromotion;
 	
 	double valeurPromotion;
 	
 	double newProductPrice; 
+	
 	
 	@ManyToOne
 	Stock stock;

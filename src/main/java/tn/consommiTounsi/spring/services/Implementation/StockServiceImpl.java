@@ -25,13 +25,20 @@ public class StockServiceImpl implements StockService{
 	   
 	@Override
 	public List<Stock> retrieveAllStocks() {
-		// TODO Auto-generated method stub
-		return stockRepository.findAll();
+		List<Stock> stocks = stockRepository.findAll();
+		Date aujourduit = new Date(System.currentTimeMillis());
+		for(int i=0;i<stocks.size();i++){
+			if(stocks.get(i).getDateExpiration().getDate()<aujourduit.getDate()){
+				removeStock(stocks.get(i).getIdStock());
+			}
+		}
+		return stocks;
 	}
 
 	@Override
 	public Stock addStock(Stock s) {
 		// TODO Auto-generated method stub
+		//s.setDateExpiration(dateExpiration);
 		return stockRepository.save(s);
 	}
 

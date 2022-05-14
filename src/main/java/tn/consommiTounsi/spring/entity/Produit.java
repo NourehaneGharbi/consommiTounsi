@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -58,9 +61,8 @@ public class Produit implements Serializable{
 	@Column(name="categorieProduit")
 	CategorieProduit categorieProduit;
 
-	@OneToOne(mappedBy="produit")
-	Stock stock;
-
+	//@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	private Set<Commande> commandes;
 	

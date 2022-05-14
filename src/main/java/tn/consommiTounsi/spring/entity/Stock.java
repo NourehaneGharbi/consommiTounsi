@@ -7,13 +7,18 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,9 +51,13 @@ public class Stock implements Serializable{
 	@Column(name="libelleStock")
 	String libelleStock;
 	
+	@Column(name="nbrLike")
+	Integer nbrLike;
+	
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy="stock")
 	//private Set<Produit> produits;
 	
+	@JsonIgnore
 	@OneToOne
 	Produit produit;
 	
@@ -65,7 +74,10 @@ public class Stock implements Serializable{
 	@Column(name="nbrCmd")
 	Integer nbrCmd;
 	
+	//@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	@ManyToOne
+	@JoinColumn(name="rayons_id_rayons")
 	Rayons rayons;
 	
 	//Date date = new Date(System.currentTimeMillis());	
@@ -105,6 +117,10 @@ public class Stock implements Serializable{
 
 	public void setNbrCmd(Integer nbrCmd) {
 		this.nbrCmd = nbrCmd;
+	}
+
+	public void setNbrLike(Integer nbrLike) {
+		this.nbrLike = nbrLike;
 	}
 
 	

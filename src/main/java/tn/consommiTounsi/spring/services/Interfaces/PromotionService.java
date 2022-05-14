@@ -11,10 +11,8 @@ public interface PromotionService {
 
 	List<Promotion> retrieveAllPromotions();
 
-	Promotion addPromotion(Promotion p, Long id);
+	Promotion updatePromotion(Promotion p, Long id);
 
-	Promotion updatePromotion(Promotion p);
-	
 //	Promotion updatePromotionById(Long id, Integer quantite, Integer quantiteMin, String libelleStock);
 
 	//Stock retrieveStock(Long id);

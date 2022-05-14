@@ -2,6 +2,7 @@ package tn.consommiTounsi.spring.services.Implementation;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Service;
 
 import tn.consommiTounsi.spring.entity.Commande;
 import tn.consommiTounsi.spring.entity.Rayons;
+import tn.consommiTounsi.spring.entity.StatBestProd;
 import tn.consommiTounsi.spring.entity.Stock;
 import tn.consommiTounsi.spring.repository.RayonsRepository;
+
 import tn.consommiTounsi.spring.repository.StockRepository;
 import tn.consommiTounsi.spring.services.Interfaces.RayonsService;
 
@@ -29,6 +32,7 @@ public class RayonsServiceImpl implements RayonsService{
 	@Autowired
 	StockRepository stockRepository;
 
+	
 	@Override
 	public List<Rayons> retrieveAllRayons() {
 		// TODO Auto-generated method stub
@@ -61,11 +65,12 @@ public class RayonsServiceImpl implements RayonsService{
 	}
 
 	@Override
-	public Rayons updateRayonsById(Long id, String type) {
+	public Rayons updateRayonsById(Long id, Rayons r) {
 		// TODO Auto-generated method stub
-		Rayons r= rayonsRepository.findById(id).get();
-		r.setTypeRayons(type);
-		return rayonsRepository.save(r);
+		Rayons rayondb= rayonsRepository.findById(id).get();
+		rayondb.setTypeRayons(r.getTypeRayons());
+		rayondb.setCategorieProduit(r.getCategorieProduit());
+		return rayonsRepository.save(rayondb);
 	}
 	
 	public List<Stock> nbrVenteProdStock(){
@@ -79,28 +84,29 @@ public class RayonsServiceImpl implements RayonsService{
 		return stocks;
 	}
 
-	public List<Rayons> nbrVenteProdCommande(){
-		int nbrCmd=0;
-		String nom="";
+	@Override
+	public List<StatBestProd> nbrVenteProdCommande(){
+		List<StatBestProd> res = new ArrayList<>();
+		
 		List<Rayons> rayons = retrieveAllRayons();
+		
 		for(int x=0; x<rayons.size(); x++){
-			for(Stock st: rayons.get(x).getStocks())
+			int nbrCmd=0;
+			String nom="";
+			for(Stock st: rayons.get(x).getStocks()){
 				if(nbrCmd<st.getNbrCmd()){
 					nbrCmd=st.getNbrCmd();
 					nom=st.getProduit().getLibelleProduit();
 					System.out.println(nbrCmd);
 				}
-			rayons.get(x).setNbrCmdProd(nbrCmd);
-			rayons.get(x).setLibelleProdVentMax(nom);
-			rayonsRepository.save(rayons.get(x));
-		 }
-		
-		  return rayons;
-		
+			}
+			res.add(StatBestProd.of(nbrCmd, nom));
 		}
-		
-		
+		return res;
+			
 	}
+		
+}
 	
 	
 

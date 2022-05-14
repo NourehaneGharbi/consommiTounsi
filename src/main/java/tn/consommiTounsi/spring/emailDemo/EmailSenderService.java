@@ -39,25 +39,15 @@ public class EmailSenderService {
 	}
 	
 	
-	public void sendMail(String toEmail)
+	public void sendMail(String libelle)
 		
-		throws MessagingException, UnsupportedEncodingException {
-		
-		Date aujourdhui = new Date(System.currentTimeMillis());
-	//	Optional<User> user = userRepository.findById(id);
-		List<Stock> stocks = stockServiceImpl.retrieveAllStocks();
-	   // String toAddress = user.;
-		    
+		throws MessagingException, UnsupportedEncodingException {	
 		    String fromAddress = "nourehane.gharbi@esprit.tn";
 		    String senderName = "Consommi Tounsi";
 		    String subject = "Veuillez vérifier votre Promotion";
 		    String content = "Cher [[name]],<br>"
 		    		+"Les dates de ces produits seront bientôt expirée : "
-		    		 + String.join(
-							  ",", stocks.stream()
-							  .filter(s -> (s.getDateExpiration().getDate()-aujourdhui.getDate())<6)
-							  .map(s -> s.getProduit().getLibelleProduit())
-							  .collect(Collectors.toList()))
+		    		 +libelle
 		    		+"<br>"
 		            + "Veuillez cliquer sur le lien ci-dessous pour mettre les produits en promotion :<br>"
 		            + "<h3><a href=\"http://localhost:8081/SpringMVC/demandePromotion\" target=\"_self\">PROMOTION</a></h3>"
@@ -69,7 +59,7 @@ public class EmailSenderService {
 		    MimeMessageHelper helper = new MimeMessageHelper(message);
 		     
 		    helper.setFrom(fromAddress, senderName);
-		    helper.setTo(toEmail);
+		    helper.setTo("nourhene.gharbi1@gmail.com");
 		    helper.setSubject(subject);
 		     
 		 //   content = content.replace("[[name]]", user.getFullName());
